@@ -1,0 +1,38 @@
+{\rtf1\ansi\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9\par
+\b Create IAM user with admin perm, download access keys\par
+Launch an ubuntu ec2 instance\par
+create a role for ec2 instance\par
+assign role to ec2 instance\par
+Login to the instance\par
+Setup aws cli\par
+\b0 curl "{{\field{\*\fldinst{HYPERLINK https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip }}{\fldrslt{https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\ul0\cf0}}}}\f0\fs22 " -o "awscliv2.zip"\par
+unzip awscliv2.zip\par
+sudo ./aws/install\par
+$ aws configure\par
+AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE\par
+AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY\par
+Default region name [None]: region-code\par
+Default output format [None]: json\par
+\b Instal kubectl\par
+\b0 curl -o kubectl {{\field{\*\fldinst{HYPERLINK https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.9/2020-08-04/bin/linux/amd64/kubectl }}{\fldrslt{https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.9/2020-08-04/bin/linux/amd64/kubectl\ul0\cf0}}}}\f0\fs22\par
+chmod +x ./kubectl\par
+sudo mv ./kubectl /usr/local/bin\par
+kubectl version --short --client\par
+\b Create EKS  IAM role\par
+ \tab\b0 NAME: eksClusterRole\b  \par
+\b0\tab Choose EKS from the list of services, then EKS - Cluster for your use case, and then Next: Permissions.\par
+\b Create your Amazon EKS cluster VPC using CLOUDFORMATION\par
+\b0\tab Create stack by using below template\par
+\tab NAME: EKS-VPC\par
+\tab {{\field{\*\fldinst{HYPERLINK https://amazon-eks.s3.us-west-2.amazonaws.com/cloudformation/2020-08-12/amazon-eks-vpc-private-subnets.yaml }}{\fldrslt{https://amazon-eks.s3.us-west-2.amazonaws.com/cloudformation/2020-08-12/amazon-eks-vpc-private-subnets.yaml\ul0\cf0}}}}\f0\fs22\par
+\par
+\b Create EKS CLuster\par
+\tab 1. First page fill in name and tags\par
+\tab 2. Select VPC created earlier, choose public subnets for endpoint, select SG\par
+\tab\tab cluster endpoint access: Public & private\par
+\tab 3. Select loggin if required\par
+\b0\par
+}
